@@ -1,13 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-green: #92f792;
+  --dark-bg: #1a1a1a;
+  --cyber-blue: #7dd3fc;
+  --text-primary: #c8e6c9;
+  --text-secondary: #81c784;
+  --glow-strength: 5px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Courier New', monospace;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.cyber-glitch {
+  text-shadow:
+    0 0 var(--glow-strength) var(--text-secondary),
+    0 0 calc(var(--glow-strength) * 2) var(--text-secondary);
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow:
+      0 0 var(--glow-strength) var(--text-secondary),
+      0 0 calc(var(--glow-strength) * 2) var(--text-secondary);
+  }
+
+  50% {
+    text-shadow:
+      -1px 0 var(--glow-strength) var(--cyber-blue),
+      1px 0 calc(var(--glow-strength) * 2) var(--text-secondary);
+  }
+
+  100% {
+    text-shadow:
+      0 0 var(--glow-strength) var(--text-secondary),
+      0 0 calc(var(--glow-strength) * 2) var(--text-secondary);
+  }
+}
+
+.terminal-text {
+  border-right: 2px solid var(--text-secondary);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.cyber-border {
+  border: 1px solid var(--text-secondary);
+  box-shadow: 0 0 var(--glow-strength) var(--text-secondary);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cyber-button {
+  background: transparent;
+  border: 1px solid var(--text-secondary);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cyber-button:hover {
+  background: var(--text-secondary);
+  color: var(--dark-bg);
+  box-shadow: 0 0 calc(var(--glow-strength) * 2) var(--text-secondary);
+}
+
+.matrix-bg {
+  background-color: rgba(146, 247, 146, 0.02);
+  background-image:
+    linear-gradient(0deg,
+      transparent 24%,
+      rgba(146, 247, 146, 0.03) 25%,
+      rgba(146, 247, 146, 0.03) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(146, 247, 146, 0.03) 75%,
+      rgba(146, 247, 146, 0.03) 76%,
+      transparent 77%,
+      transparent);
+  background-size: 60px 60px;
 }
