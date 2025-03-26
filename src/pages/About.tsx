@@ -54,13 +54,7 @@ const About = () => {
                                             alt="Lyle Chadya"
                                             className="w-full h-full object-cover rounded-lg cyber-border p-1"
                                         />
-                                        {/* Decorative elements */}
-                                        <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[#92f792]"></div>
-                                        <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[#92f792]"></div>
-                                        <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[#92f792]"></div>
-                                        <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[#92f792]"></div>
                                     </div>
-                                    <div className="absolute inset-0 bg-[#92f792] opacity-10 animate-pulse rounded-lg"></div>
                                 </div>
                                 <div className="w-full md:w-2/3">
                                     <h1 className="text-3xl md:text-4xl font-bold mb-6 cyber-glitch text-[#c8e6c9] flex items-center gap-3">
