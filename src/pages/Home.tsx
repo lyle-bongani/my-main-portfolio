@@ -274,10 +274,14 @@ const Home = () => {
                             <span>View Projects</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <Link to="/contact" className="cyber-button group flex items-center gap-3 px-8 py-4 text-lg">
-                            <span>Contact Me</span>
+                        <a 
+                            href="/images/Lyle CV.pdf" 
+                            download="Lyle_CV.pdf"
+                            className="cyber-button group flex items-center gap-3 px-8 py-4 text-lg"
+                        >
+                            <span>Download CV</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                        </a>
                     </div>
                 </div>
             )}
