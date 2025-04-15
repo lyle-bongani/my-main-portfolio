@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Star, Quote } from 'lucide-react';
+import { Terminal, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 interface Testimonial {
     id: number;
@@ -11,15 +11,15 @@ interface Testimonial {
 }
 
 const Testimonials = () => {
-    const [showContent, setShowContent] = useState(false);
-    const [currentLine, setCurrentLine] = useState(0);
+    const [bootComplete, setBootComplete] = useState(false);
     const [activeTestimonial, setActiveTestimonial] = useState<number>(0);
+    const [systemStatus, setSystemStatus] = useState<string[]>([]);
 
-    const bootLines = [
-        '> INITIALIZING_FEEDBACK_MATRIX',
-        '> LOADING_CLIENT_DATA',
-        '> PROCESSING_TESTIMONIALS',
-        '> SYSTEM_READY'
+    const bootMessages = [
+        'Initializing feedback matrix...',
+        'Loading client testimonials...',
+        'Processing user experiences...',
+        'System ready.'
     ];
 
     const testimonials: Testimonial[] = [
@@ -51,11 +51,11 @@ const Testimonials = () => {
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        bootLines.forEach((_, index) => {
+        bootMessages.forEach((message, index) => {
             timeout = setTimeout(() => {
-                setCurrentLine(index);
-                if (index === bootLines.length - 1) {
-                    setShowContent(true);
+                setSystemStatus(prev => [...prev, message]);
+                if (index === bootMessages.length - 1) {
+                    setTimeout(() => setBootComplete(true), 500);
                 }
             }, index * 800);
         });
@@ -64,28 +64,31 @@ const Testimonials = () => {
     }, []);
 
     useEffect(() => {
-        if (showContent) {
+        if (bootComplete) {
             const interval = setInterval(() => {
                 setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
             }, 5000);
             return () => clearInterval(interval);
         }
-    }, [showContent, testimonials.length]);
+    }, [bootComplete, testimonials.length]);
 
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
-            <div className="max-w-4xl mx-auto">
-                {/* Boot Sequence */}
-                <div className="mb-8 font-mono">
-                    {bootLines.slice(0, currentLine + 1).map((line, index) => (
-                        <div key={index} className="text-[#81c784] flex items-center gap-2 mb-2">
-                            <Terminal className="w-4 h-4" />
-                            <span>{line}</span>
+            <div className="max-w-6xl mx-auto">
+                {!bootComplete ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                            <div className="space-y-3">
+                                {systemStatus.map((message, index) => (
+                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                        <Terminal className="w-4 h-4" />
+                                        <span>{message}</span>
+                                    </p>
+                                ))}
+                            </div>
                         </div>
-                    ))}
-                </div>
-
-                {showContent && (
+                    </div>
+                ) : (
                     <div className="space-y-8 animate-fadeIn">
                         {/* Header */}
                         <div className="cyber-border p-6">

@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Terminal, Code, Rocket, Star, Bot, Globe, Book, Binary, ChevronRight } from 'lucide-react';
+import BootSequence from '../components/BootSequence';
 
 const About = () => {
-    const [showContent, setShowContent] = useState(false);
-    const [currentLine, setCurrentLine] = useState(0);
+    const [bootComplete, setBootComplete] = useState(false);
+    const [systemStatus, setSystemStatus] = useState<string[]>([]);
 
-    const bioLines = [
-        '> INITIALIZING_PERSONAL_DATA',
-        '> LOADING_BACKGROUND_INFO',
-        '> ACCESSING_JOURNEY_DETAILS',
-        '> SYSTEM_READY'
+    const bootMessages = [
+        'Initializing design system...',
+        'Loading UI components...',
+        'Establishing creative connection...',
+        'System ready.'
     ];
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        bioLines.forEach((_, index) => {
+        bootMessages.forEach((message, index) => {
             timeout = setTimeout(() => {
-                setCurrentLine(index);
-                if (index === bioLines.length - 1) {
-                    setShowContent(true);
+                setSystemStatus(prev => [...prev, message]);
+                if (index === bootMessages.length - 1) {
+                    setTimeout(() => setBootComplete(true), 500);
                 }
             }, index * 800);
         });
@@ -29,20 +30,20 @@ const About = () => {
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
             <div className="max-w-6xl mx-auto">
-                {/* Boot Sequence */}
-                <div className="mb-8 font-mono">
-                    {bioLines.slice(0, currentLine + 1).map((line, index) => (
-                        <div
-                            key={index}
-                            className="text-[#81c784] flex items-center gap-2 mb-2"
-                        >
-                            <Terminal className="w-4 h-4" />
-                            <span>{line}</span>
+                {!bootComplete ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                            <div className="space-y-3">
+                                {systemStatus.map((message, index) => (
+                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                        <Terminal className="w-4 h-4" />
+                                        <span>{message}</span>
+                                    </p>
+                                ))}
+                            </div>
                         </div>
-                    ))}
-                </div>
-
-                {showContent && (
+                    </div>
+                ) : (
                     <div className="space-y-8 animate-fadeIn">
                         {/* Hero Section with Image */}
                         <div className="cyber-border p-6">
@@ -111,18 +112,18 @@ const About = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
                                     <Globe className="w-6 h-6 text-[#81c784] mb-3" />
-                                    <h3 className="text-[#92f792] font-bold mb-2">Jamason Website</h3>
-                                    <p className="text-[#c8e6c9] text-sm">Enhanced user experience and modern interface implementation</p>
+                                    <h3 className="text-[#92f792] font-bold mb-2">Fudo Restaurant</h3>
+                                    <p className="text-[#c8e6c9] text-sm">A modern restaurant website with online ordering capabilities</p>
                                 </div>
                                 <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
                                     <Binary className="w-6 h-6 text-[#81c784] mb-3" />
-                                    <h3 className="text-[#92f792] font-bold mb-2">Camps Pharmaceuticals</h3>
-                                    <p className="text-[#c8e6c9] text-sm">Developed professional web presence for healthcare sector</p>
+                                    <h3 className="text-[#92f792] font-bold mb-2">Fry Lyle</h3>
+                                    <p className="text-[#c8e6c9] text-sm">A food delivery application with real-time order tracking</p>
                                 </div>
                                 <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
                                     <Bot className="w-6 h-6 text-[#81c784] mb-3" />
-                                    <h3 className="text-[#92f792] font-bold mb-2">Quiily Bot</h3>
-                                    <p className="text-[#c8e6c9] text-sm">A chatbot built for development and learning purposes</p>
+                                    <h3 className="text-[#92f792] font-bold mb-2">PokéDex</h3>
+                                    <p className="text-[#c8e6c9] text-sm">A Pokémon encyclopedia application using PokeAPI</p>
                                 </div>
                             </div>
                         </div>

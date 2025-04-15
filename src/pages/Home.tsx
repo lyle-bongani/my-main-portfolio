@@ -128,7 +128,7 @@ const Home = () => {
     useEffect(() => {
         if (!bootSequence) return;
 
-        const text = "UI/UX DESIGNER & FRONT-END DEVELOPER";
+        const text = "SOFTWARE DEVELOPER";
         let index = 0;
 
         const typeText = () => {
@@ -143,24 +143,24 @@ const Home = () => {
     }, [bootSequence]);
 
     const [stats] = useState({
-        uiDesigns: '5',
-        graphicDesigns: '7',
-        devProjects: '15',
-        satisfaction: '100%'
+        completedProjects: '15',
+        skills: '12',
+        githubRepos: '25',
+        codeQuality: '100%'
     });
 
     const statDescriptions = {
-        uiDesigns: 'Modern, intuitive interfaces that delight users',
-        graphicDesigns: 'Creative visuals that tell compelling stories',
-        devProjects: 'Robust applications built with cutting-edge tech',
-        satisfaction: 'Happy clients who trust in my expertise'
+        completedProjects: 'Successfully delivered software projects',
+        skills: 'Programming languages and frameworks mastered',
+        githubRepos: 'Open source contributions and personal projects',
+        codeQuality: 'Code quality and test coverage maintained'
     };
 
     const achievements = [
-        { icon: Award, title: 'Best UI Design', description: 'Awarded for innovative interface design' },
-        { icon: Star, title: 'Client Satisfaction', description: 'Consistently high client ratings' },
+        { icon: Code, title: 'Technical Excellence', description: 'Delivering high-quality, efficient code' },
+        { icon: Star, title: 'Client Satisfaction', description: 'Consistently exceeding project requirements' },
         { icon: Target, title: 'Project Success', description: '100% project completion rate' },
-        { icon: Zap, title: 'Fast Delivery', description: 'Quick turnaround on all projects' }
+        { icon: Zap, title: 'Fast Delivery', description: 'Rapid development and deployment' }
     ];
 
     const handleScroll = () => {
@@ -195,37 +195,39 @@ const Home = () => {
                     </div>
                 </div>
             ) : (
-                <div className="relative z-10 min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center p-6">
+                <div className="relative z-10 min-h-[100vh] md:min-h-[50vh] flex flex-col items-center justify-center p-6">
                     {/* Welcome Section */}
-                    <div className={`text-center mb-16 transition-opacity duration-500 ${activeSection === 'welcome' ? 'opacity-100' : 'opacity-0'}`}>
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <div className="cyber-border px-6 py-2 bg-[#81c784] bg-opacity-20 group hover:bg-opacity-30 transition-all duration-300">
-                                <span className="text-[#c8e6c9] font-mono text-sm group-hover:text-[#92f792] transition-colors">
-                                    Welcome to my portfolio
-                                </span>
-                            </div>
-                        </div>
-                        <h1 className="text-5xl md:text-7xl font-bold text-[#c8e6c9] mb-6 cyber-glitch">
-                            <span ref={textRef}></span>
-                        </h1>
-                        <p className="text-[#c8e6c9] text-xl md:text-2xl max-w-3xl mx-auto group">
-                            Crafting beautiful and functional digital experiences
-                            <span className="inline-block ml-3 group-hover:translate-x-1 transition-transform">
-                                <ArrowRight className="w-6 h-6 inline" />
+                    <div className={`text-center transition-opacity duration-500 ${activeSection === 'welcome' ? 'opacity-100' : 'opacity-0'}`}>
+                        {/* Welcome text */}
+                        <div className="mb-6">
+                            <span className="text-[#c8e6c9] font-mono text-sm">
+                                Welcome to my portfolio
                             </span>
+                        </div>
+
+                        {/* Main title */}
+                        <div className="mb-6">
+                            <h1 className="text-6xl md:text-8xl font-bold text-[#c8e6c9] cyber-glitch">
+                                <span ref={textRef}></span>
+                            </h1>
+                        </div>
+
+                        {/* Tagline */}
+                        <p className="text-[#c8e6c9] text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+                            Building innovative and scalable software solutions
                         </p>
-                        <div className="mt-8 flex items-center justify-center gap-2">
+
+                        {/* Author signature */}
+                        <div className="flex items-center justify-center gap-2 mb-12 md:mb-16">
                             <span className="text-[#81c784] text-lg">by</span>
-                            <div className="cyber-border px-4 py-1 bg-[#81c784] bg-opacity-10 group hover:bg-opacity-20 transition-all duration-300">
-                                <span className="text-[#92f792] font-mono text-lg group-hover:text-[#c8e6c9] transition-colors">
-                                    LYLE CHADYA
-                                </span>
-                            </div>
+                            <span className="text-[#92f792] font-mono text-xl">
+                                LYLE CHADYA
+                            </span>
                         </div>
                     </div>
 
-                    {/* Stats Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mb-16">
+                    {/* Stats Grid - Only show on larger screens */}
+                    <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mb-16">
                         {Object.entries(stats).map(([key, value]) => (
                             <div
                                 key={key}
@@ -234,13 +236,13 @@ const Home = () => {
                                 onMouseLeave={() => setHoveredStat(null)}
                             >
                                 <div className="flex items-center gap-4 mb-4">
-                                    {key === 'uiDesigns' && <Palette className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
-                                    {key === 'graphicDesigns' && <Layout className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
-                                    {key === 'devProjects' && <Code className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
-                                    {key === 'satisfaction' && <CheckCircle2 className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
+                                    {key === 'completedProjects' && <Code className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
+                                    {key === 'skills' && <Terminal className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
+                                    {key === 'githubRepos' && <GitBranch className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
+                                    {key === 'codeQuality' && <Shield className="w-7 h-7 text-[#c8e6c9] group-hover:text-[#92f792] transition-colors" />}
                                     <h3 className="text-[#c8e6c9] font-semibold text-lg group-hover:text-[#92f792] transition-colors">
                                         {key.replace(/([A-Z])/g, ' $1').trim()}
-                            </h3>
+                                    </h3>
                                 </div>
                                 <p className="text-4xl font-bold text-[#c8e6c9] group-hover:text-[#92f792] transition-colors mb-2">
                                     {value}
@@ -269,15 +271,18 @@ const Home = () => {
                     </div>
 
                     {/* Navigation Buttons */}
-                    <div className="mt-16 flex gap-6">
-                        <Link to="/projects" className="cyber-button group flex items-center gap-3 px-8 py-4 text-lg">
+                    <div className="mt-16 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                        <Link 
+                            to="/projects" 
+                            className="cyber-button group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto text-center justify-center"
+                        >
                             <span>View Projects</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <a 
                             href="/images/Lyle CV.pdf" 
                             download="Lyle_CV.pdf"
-                            className="cyber-button group flex items-center gap-3 px-8 py-4 text-lg"
+                            className="cyber-button group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto text-center justify-center"
                         >
                             <span>Download CV</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

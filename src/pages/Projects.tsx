@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Code, Palette, ExternalLink, Github, Eye } from 'lucide-react';
+import { Terminal, Code, Palette, ExternalLink, Github, Eye, Server, Layers } from 'lucide-react';
+import BootSequence from '../components/BootSequence';
 
 interface Project {
     title: string;
@@ -7,93 +8,92 @@ interface Project {
     image: string;
     liveUrl: string;
     githubUrl?: string;
-    type: 'dev' | 'design';
+    type: 'frontend' | 'backend' | 'fullstack';
     technologies?: string[];
 }
 
 const Projects = () => {
-    const [showContent, setShowContent] = useState(false);
-    const [currentLine, setCurrentLine] = useState(0);
-    const [activeFilter, setActiveFilter] = useState<'all' | 'dev' | 'design'>('all');
+    const [bootComplete, setBootComplete] = useState(false);
+    const [activeFilter, setActiveFilter] = useState<'all' | 'frontend' | 'backend' | 'fullstack'>('all');
+    const [systemStatus, setSystemStatus] = useState<string[]>([]);
 
-    const bootLines = [
-        '> INITIALIZING_PROJECT_MATRIX',
-        '> LOADING_PORTFOLIO_DATA',
-        '> RENDERING_INTERFACE',
-        '> SYSTEM_READY'
-    ];
-
-    const projects: Project[] = [
-        {
-            title: 'Fudo Restaurant',
-            description: 'A modern restaurant website with online ordering capabilities.',
-            image: 'https://fudo-cyan.vercel.app/',
-            liveUrl: 'https://fudo-cyan.vercel.app/',
-            githubUrl: 'https://github.com/lyle-bongani/Fudo.git',
-            type: 'dev',
-            technologies: ['React', 'Next.js', 'Tailwind CSS']
-        },
-        {
-            title: 'Fry Lyle',
-            description: 'A food delivery application with real-time order tracking and seamless checkout process.',
-            image: 'https://typscript-portfolio.vercel.app/',
-            liveUrl: 'https://typscript-portfolio.vercel.app/',
-            githubUrl: 'https://github.com/lyle-bongani/typscript-portfolio',
-            type: 'dev',
-            technologies: ['TypeScript', 'React', 'Tailwind CSS', 'Food Delivery API']
-        },
-        {
-            title: 'PokéDex',
-            description: 'A Pokémon encyclopedia application.',
-            image: 'https://pok-dex-iota.vercel.app/',
-            liveUrl: 'https://pok-dex-iota.vercel.app/',
-            githubUrl: 'https://github.com/lyle-bongani/Pok-Dex.git',
-            type: 'dev',
-            technologies: ['React', 'PokeAPI', 'CSS']
-        },
-        {
-            title: 'Real Estate Platform',
-            description: 'Modern real estate platform design with property listings and search.',
-            image: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/ZaW7HoEmD2mdjQgHWm5KnS/REAL-LYLE-ESTATE',
-            liveUrl: 'https://www.figma.com/proto/ZaW7HoEmD2mdjQgHWm5KnS/REAL-LYLE-ESTATE?node-id=11-2&starting-point-node-id=11%3A2&scaling=scale-down-width&content-scaling=fixed&t=Ta0bcEthezPAx65d-1',
-            type: 'design'
-        },
-        {
-            title: 'Jameson Website',
-            description: 'Redesign concept for Jameson whiskey website.',
-            image: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/cxlKc7PYVLrqTVycRTNQW6/JAMESON-LYLE',
-            liveUrl: 'https://www.figma.com/proto/cxlKc7PYVLrqTVycRTNQW6/JAMESON-LYLE?node-id=1-2&t=VLmfmUzFtI9DnPRY-1',
-            type: 'design'
-        },
-        {
-            title: 'Luxury Watch Retail',
-            description: 'E-commerce design for luxury timepieces.',
-            image: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/4fBZUDfiTLPVER1IUI1YP1/Luxury-watch-retail-lyle',
-            liveUrl: 'https://www.figma.com/proto/4fBZUDfiTLPVER1IUI1YP1/Luxury-watch-retail-lyle?node-id=17-3913&t=8XL61VvKZEIsvmzR-1',
-            type: 'design'
-        },
-        {
-            title: 'Food App Design',
-            description: 'Mobile app design for food delivery service.',
-            image: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/g0wVjkoplcHQAwNV0ESare/Food-app-design-Lyle',
-            liveUrl: 'https://www.figma.com/proto/g0wVjkoplcHQAwNV0ESare/Food-app-design-Lyle?node-id=87-70&starting-point-node-id=27%3A2&t=pv4xNut81s26VsDO-1',
-            type: 'design'
-        }
+    const bootMessages = [
+        'Loading project data...',
+        'Initializing portfolio...',
+        'Processing assets...',
+        'System ready.'
     ];
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        bootLines.forEach((_, index) => {
+        bootMessages.forEach((message, index) => {
             timeout = setTimeout(() => {
-                setCurrentLine(index);
-                if (index === bootLines.length - 1) {
-                    setShowContent(true);
+                setSystemStatus(prev => [...prev, message]);
+                if (index === bootMessages.length - 1) {
+                    setTimeout(() => setBootComplete(true), 500);
                 }
             }, index * 800);
         });
 
         return () => clearTimeout(timeout);
     }, []);
+
+    const projects: Project[] = [
+        {
+            title: 'PokéDex',
+            description: 'A comprehensive Pokémon encyclopedia application with API integration for detailed Pokémon data, abilities, and stats.',
+            image: 'https://pok-dex-iota.vercel.app/',
+            liveUrl: 'https://pok-dex-iota.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/Pok-Dex.git',
+            type: 'fullstack',
+            technologies: ['TypeScript', 'React', 'PokeAPI', 'Node.js', 'Express']
+        },
+        {
+            title: 'Backers New Inn',
+            description: 'A modern restaurant management system built with Next.js and TypeScript for optimal performance and type safety.',
+            image: 'https://backers-new-inn.vercel.app/',
+            liveUrl: 'https://backers-new-inn.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/backers-new-inn',
+            type: 'frontend',
+            technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS']
+        },
+        {
+            title: 'Fry Lyle App',
+            description: 'A TypeScript-powered React frontend application for food delivery with modern UI components.',
+            image: 'https://typscript-portfolio.vercel.app/',
+            liveUrl: 'https://typscript-portfolio.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/typscript-portfolio',
+            type: 'frontend',
+            technologies: ['TypeScript', 'React', 'Tailwind CSS', 'Redux']
+        },
+        {
+            title: 'StreamMax',
+            description: 'A mobile-first React TypeScript application for streaming content with responsive design.',
+            image: 'https://stream-max-ruddy.vercel.app/',
+            liveUrl: 'https://stream-max-ruddy.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/StreamMax',
+            type: 'frontend',
+            technologies: ['React', 'TypeScript', 'React Native', 'Mobile UI']
+        },
+        {
+            title: 'Progress Report',
+            description: 'A full-stack TypeScript application with Node.js backend and React frontend for comprehensive academic progress tracking.',
+            image: 'https://progress-report-sage.vercel.app/',
+            liveUrl: 'https://progress-report-sage.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/Progress-Report',
+            type: 'fullstack',
+            technologies: ['TypeScript', 'Node.js', 'Express', 'React', 'PostgreSQL']
+        },
+        {
+            title: 'Tech Connect',
+            description: 'A Next.js application with Firebase integration for professional networking and authentication.',
+            image: 'https://tech-connect-blond.vercel.app/',
+            liveUrl: 'https://tech-connect-blond.vercel.app/',
+            githubUrl: 'https://github.com/lyle-bongani/tech-connect',
+            type: 'fullstack',
+            technologies: ['Next.js', 'Firebase', 'Firestore', 'Firebase Auth', 'TypeScript']
+        }
+    ];
 
     const filteredProjects = projects.filter(project =>
         activeFilter === 'all' ? true : project.type === activeFilter
@@ -102,17 +102,20 @@ const Projects = () => {
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
             <div className="max-w-6xl mx-auto">
-                {/* Boot Sequence */}
-                <div className="mb-8 font-mono">
-                    {bootLines.slice(0, currentLine + 1).map((line, index) => (
-                        <div key={index} className="text-[#81c784] flex items-center gap-2 mb-2">
-                            <Terminal className="w-4 h-4" />
-                            <span>{line}</span>
+                {!bootComplete ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                            <div className="space-y-3">
+                                {systemStatus.map((message, index) => (
+                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                        <Terminal className="w-4 h-4" />
+                                        <span>{message}</span>
+                                    </p>
+                                ))}
+                            </div>
                         </div>
-                    ))}
-                </div>
-
-                {showContent && (
+                    </div>
+                ) : (
                     <div className="space-y-8 animate-fadeIn">
                         {/* Header */}
                         <div className="cyber-border p-6">
@@ -132,16 +135,22 @@ const Projects = () => {
                                 ALL
                             </button>
                             <button
-                                onClick={() => setActiveFilter('dev')}
-                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'dev' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                onClick={() => setActiveFilter('frontend')}
+                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'frontend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
-                                <Code className="w-4 h-4" /> DEV
+                                <Code className="w-4 h-4" /> FRONTEND
                             </button>
                             <button
-                                onClick={() => setActiveFilter('design')}
-                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'design' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                onClick={() => setActiveFilter('backend')}
+                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'backend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
-                                <Palette className="w-4 h-4" /> DESIGN
+                                <Server className="w-4 h-4" /> BACKEND
+                            </button>
+                            <button
+                                onClick={() => setActiveFilter('fullstack')}
+                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'fullstack' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                            >
+                                <Layers className="w-4 h-4" /> FULL STACK
                             </button>
                         </div>
 
@@ -204,7 +213,7 @@ const Projects = () => {
                                                 className="cyber-button flex items-center gap-2 text-[#92f792] hover:text-[#c8e6c9] px-6 py-3 text-lg"
                                             >
                                                 <ExternalLink className="w-5 h-5" />
-                                                {project.type === 'design' ? 'VIEW DESIGN' : 'LIVE PREVIEW'}
+                                                LIVE PREVIEW
                                             </a>
                                             {project.githubUrl && (
                                                 <a

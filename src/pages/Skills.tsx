@@ -9,7 +9,8 @@ import {
     PenTool,
     Monitor,
     Cpu,
-    Workflow
+    Workflow,
+    Brain
 } from 'lucide-react';
 
 interface Skill {
@@ -24,31 +25,18 @@ interface SkillCategory {
 }
 
 const Skills = () => {
-    const [showContent, setShowContent] = useState(false);
-    const [currentLine, setCurrentLine] = useState(0);
-    const [activeCategory, setActiveCategory] = useState<string>('Design');
+    const [bootComplete, setBootComplete] = useState(false);
+    const [activeCategory, setActiveCategory] = useState<string>('Frontend');
+    const [systemStatus, setSystemStatus] = useState<string[]>([]);
 
-    const bootLines = [
-        '> LOADING_SKILL_MATRIX',
-        '> ANALYZING_CAPABILITIES',
-        '> INITIALIZING_TECH_STACK',
-        '> SYSTEM_READY'
+    const bootMessages = [
+        'Initializing skill matrix...',
+        'Loading proficiency data...',
+        'Analyzing capabilities...',
+        'System ready.'
     ];
 
     const skillCategories: SkillCategory[] = [
-        {
-            title: 'Design',
-            icon: Palette,
-            skills: [
-                { name: 'UI/UX Design', proficiency: 90 },
-                { name: 'Wireframing', proficiency: 85 },
-                { name: 'Prototyping', proficiency: 85 },
-                { name: 'User Research', proficiency: 80 },
-                { name: 'Visual Design', proficiency: 90 },
-                { name: 'Figma', proficiency: 95 },
-                { name: 'Graphic Design', proficiency: 85 }
-            ]
-        },
         {
             title: 'Frontend',
             icon: Monitor,
@@ -67,7 +55,9 @@ const Skills = () => {
             title: 'Backend',
             icon: Server,
             skills: [
-                { name: 'Node.js', proficiency: 80 }
+                { name: 'Node.js', proficiency: 80 },
+                { name: 'Firebase Firestore', proficiency: 85 },
+                { name: 'MongoDB', proficiency: 80 }
             ]
         },
         {
@@ -76,23 +66,32 @@ const Skills = () => {
             skills: [
                 { name: 'VSCode', proficiency: 95 },
                 { name: 'GitHub', proficiency: 90 },
-                { name: 'Windsurf', proficiency: 85 },
-                { name: 'Cursor', proficiency: 90 },
-                { name: 'Figma', proficiency: 95 },
-                { name: 'Canva', proficiency: 90 },
-                { name: 'Wix', proficiency: 85 },
+                { name: 'Figma', proficiency: 60 },
+                { name: 'Canva', proficiency: 60 },
                 { name: 'WordPress', proficiency: 80 }
+            ]
+        },
+        {
+            title: 'Personal Skills',
+            icon: Brain,
+            skills: [
+                { name: 'Problem Solving', proficiency: 90 },
+                { name: 'Team Collaboration', proficiency: 85 },
+                { name: 'Time Management', proficiency: 85 },
+                { name: 'Communication', proficiency: 90 },
+                { name: 'Adaptability', proficiency: 85 },
+                { name: 'Project Management', proficiency: 80 }
             ]
         }
     ];
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        bootLines.forEach((_, index) => {
+        bootMessages.forEach((message, index) => {
             timeout = setTimeout(() => {
-                setCurrentLine(index);
-                if (index === bootLines.length - 1) {
-                    setShowContent(true);
+                setSystemStatus(prev => [...prev, message]);
+                if (index === bootMessages.length - 1) {
+                    setTimeout(() => setBootComplete(true), 500);
                 }
             }, index * 800);
         });
@@ -103,20 +102,20 @@ const Skills = () => {
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
             <div className="max-w-6xl mx-auto">
-                {/* Boot Sequence */}
-                <div className="mb-8 font-mono">
-                    {bootLines.slice(0, currentLine + 1).map((line, index) => (
-                        <div
-                            key={index}
-                            className="text-[#81c784] flex items-center gap-2 mb-2"
-                        >
-                            <Terminal className="w-4 h-4" />
-                            <span>{line}</span>
+                {!bootComplete ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                            <div className="space-y-3">
+                                {systemStatus.map((message, index) => (
+                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                        <Terminal className="w-4 h-4" />
+                                        <span>{message}</span>
+                                    </p>
+                                ))}
+                            </div>
                         </div>
-                    ))}
-                </div>
-
-                {showContent && (
+                    </div>
+                ) : (
                     <div className="space-y-8 animate-fadeIn">
                         {/* Header */}
                         <div className="cyber-border p-6">

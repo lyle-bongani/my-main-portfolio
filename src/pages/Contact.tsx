@@ -3,6 +3,8 @@ import { Terminal, Mail, Phone, Copy, Check, Send, Linkedin, Instagram, CheckCir
 import Section from '../components/Section';
 
 const Contact = () => {
+    const [bootComplete, setBootComplete] = useState(false);
+    const [systemStatus, setSystemStatus] = useState<string[]>([]);
     const [showContent, setShowContent] = useState(false);
     const [currentLine, setCurrentLine] = useState(0);
     const [copiedEmail, setCopiedEmail] = useState(false);
@@ -17,37 +19,26 @@ const Contact = () => {
     const [typingText, setTypingText] = useState('');
     const [currentBootLine, setCurrentBootLine] = useState(0);
 
-    const bootLines = [
-        '> INITIALIZING_CONTACT_INTERFACE',
-        '> LOADING_COMMUNICATION_PROTOCOLS',
-        '> ESTABLISHING_SECURE_CONNECTION',
-        '> SYSTEM_READY'
+    const bootMessages = [
+        'Initializing contact interface...',
+        'Establishing secure channels...',
+        'Loading communication protocols...',
+        'System ready.'
     ];
 
-    // Typing effect for boot sequence
     useEffect(() => {
-        if (currentBootLine < bootLines.length) {
-            const currentText = bootLines[currentBootLine];
-            let currentIndex = 0;
-
-            const interval = setInterval(() => {
-                if (currentIndex <= currentText.length) {
-                    setTypingText(prev => prev + currentText[currentIndex]);
-                    currentIndex++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        setCurrentBootLine(prev => prev + 1);
-                        setTypingText('');
-                    }, 500);
+        let timeout: NodeJS.Timeout;
+        bootMessages.forEach((message, index) => {
+            timeout = setTimeout(() => {
+                setSystemStatus(prev => [...prev, message]);
+                if (index === bootMessages.length - 1) {
+                    setTimeout(() => setBootComplete(true), 500);
                 }
-            }, 50);
+            }, index * 800);
+        });
 
-            return () => clearInterval(interval);
-        } else {
-            setShowContent(true);
-        }
-    }, [currentBootLine]);
+        return () => clearTimeout(timeout);
+    }, []);
 
     const copyToClipboard = async (text: string, type: 'email' | 'phone') => {
         try {
@@ -95,16 +86,20 @@ const Contact = () => {
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
             <div className="max-w-7xl mx-auto">
-                {/* Boot Sequence */}
-                <div className="mb-8 font-mono">
-                    <div className="text-[#81c784] flex items-center gap-2">
-                        <Terminal className="w-4 h-4" />
-                        <span>{typingText}</span>
-                        <span className="animate-pulse">_</span>
+                {!bootComplete ? (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                            <div className="space-y-3">
+                                {systemStatus.map((message, index) => (
+                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                        <Terminal className="w-4 h-4" />
+                                        <span>{message}</span>
+                                    </p>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                {showContent && (
+                ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fadeIn">
                         {/* Left Column - Contact Information */}
                         <div className="lg:col-span-1 space-y-6">
