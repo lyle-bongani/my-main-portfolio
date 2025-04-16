@@ -90,15 +90,15 @@ const Testimonials = () => {
     }, [bootComplete, testimonials.length]);
 
     return (
-        <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
+        <div className="min-h-screen pt-16 sm:pt-20 px-3 sm:px-4 bg-[#1a1a1a]">
             <MatrixRain />
             <div className="max-w-6xl mx-auto">
                 {!bootComplete ? (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center">
-                        <div className="cyber-border p-8 bg-[#1a1a1a] max-w-2xl w-full">
+                    <div className="absolute inset-0 z-10 flex items-center justify-center px-3">
+                        <div className="cyber-border p-4 sm:p-8 bg-[#1a1a1a] w-full max-w-lg">
                             <div className="space-y-3">
                                 {systemStatus.map((message, index) => (
-                                    <p key={index} className="text-[#c8e6c9] font-mono flex items-center gap-3">
+                                    <p key={index} className="text-[#c8e6c9] font-mono text-sm sm:text-base flex items-center gap-3">
                                         <Terminal className="w-4 h-4" />
                                         <span>{message}</span>
                                     </p>
@@ -107,40 +107,42 @@ const Testimonials = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="space-y-8 animate-fadeIn">
+                    <div className="space-y-6 sm:space-y-8 animate-fadeIn">
                         {/* Header */}
-                        <div className="cyber-border p-6">
-                            <h1 className="text-3xl md:text-4xl font-bold cyber-glitch text-[#c8e6c9] mb-4">
+                        <div className="cyber-border p-4 sm:p-6">
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold cyber-glitch text-[#c8e6c9] mb-3 sm:mb-4">
                                 CLIENT_FEEDBACK_MATRIX
                             </h1>
-                            <p className="text-[#81c784]">ANALYZING USER EXPERIENCES</p>
+                            <p className="text-[#81c784] text-sm sm:text-base">ANALYZING USER EXPERIENCES</p>
                         </div>
 
                         {/* Testimonials Display */}
-                        <div className="relative cyber-border p-6 bg-[#1a1a1a] min-h-[400px]">
-                            <div className="absolute top-4 right-4 flex gap-1">
+                        <div className="relative cyber-border p-4 sm:p-6 bg-[#1a1a1a] min-h-[450px] sm:min-h-[400px]">
+                            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex gap-1">
                                 {testimonials.map((_, index) => (
                                     <button
                                         key={index}
                                         onClick={() => setActiveTestimonial(index)}
-                                        className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index ? 'bg-[#92f792] scale-125' : 'bg-[#81c784] opacity-50'
-                                            }`}
+                                        className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                                            activeTestimonial === index ? 'bg-[#92f792] scale-125' : 'bg-[#81c784] opacity-50'
+                                        }`}
                                     />
                                 ))}
                             </div>
 
-                            <div className="relative overflow-hidden">
+                            <div className="relative overflow-hidden pt-8 sm:pt-4">
                                 {testimonials.map((testimonial, index) => (
                                     <div
                                         key={testimonial.id}
-                                        className={`transition-all duration-500 ${activeTestimonial === index
-                                            ? 'opacity-100 translate-x-0'
-                                            : 'opacity-0 translate-x-full absolute top-0 left-0'
-                                            }`}
+                                        className={`transition-all duration-500 ${
+                                            activeTestimonial === index
+                                                ? 'opacity-100 translate-x-0'
+                                                : 'opacity-0 translate-x-full absolute top-0 left-0'
+                                        }`}
                                     >
-                                        <div className="flex flex-col md:flex-row items-center gap-8">
+                                        <div className="flex flex-col items-center gap-6 sm:gap-8">
                                             {/* Avatar */}
-                                            <div className="relative w-40 h-40 cyber-border p-2 rounded-full overflow-hidden group">
+                                            <div className="relative w-28 h-28 sm:w-40 sm:h-40 cyber-border p-1.5 sm:p-2 rounded-full overflow-hidden group">
                                                 <div className="absolute inset-0 bg-[#92f792] opacity-20 group-hover:opacity-30 transition-opacity" />
                                                 <img
                                                     src={testimonial.avatar}
@@ -151,37 +153,53 @@ const Testimonials = () => {
                                             </div>
 
                                             {/* Content */}
-                                            <div className="flex-1 space-y-4">
-                                                <div className="flex items-center gap-2 mb-2">
+                                            <div className="flex-1 space-y-3 sm:space-y-4 text-center sm:text-left">
+                                                <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2">
                                                     {[...Array(testimonial.rating)].map((_, i) => (
                                                         <Star
                                                             key={i}
-                                                            className="w-5 h-5 text-[#92f792] fill-current animate-pulse"
+                                                            className="w-4 h-4 sm:w-5 sm:h-5 text-[#92f792] fill-current animate-pulse"
                                                         />
                                                     ))}
                                                 </div>
                                                 <div className="relative">
-                                                    <Quote className="absolute -top-4 -left-4 w-8 h-8 text-[#92f792] opacity-30" />
-                                                    <p className="text-[#c8e6c9] text-lg italic pl-6">
+                                                    <Quote className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-6 h-6 sm:w-8 sm:h-8 text-[#92f792] opacity-30" />
+                                                    <p className="text-[#c8e6c9] text-base sm:text-lg italic pl-4 sm:pl-6">
                                                         {testimonial.message}
                                                     </p>
                                                 </div>
-                                                <div className="pt-4">
-                                                    <h3 className="text-[#92f792] text-xl font-bold">{testimonial.name}</h3>
-                                                    <p className="text-[#81c784]">{testimonial.role}</p>
+                                                <div className="pt-3 sm:pt-4">
+                                                    <h3 className="text-[#92f792] text-lg sm:text-xl font-bold">{testimonial.name}</h3>
+                                                    <p className="text-[#81c784] text-sm sm:text-base">{testimonial.role}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
+
+                            {/* Navigation Buttons */}
+                            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 sm:gap-6">
+                                <button
+                                    onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                                    className="cyber-button p-2 sm:p-3 hover:text-[#92f792] transition-colors"
+                                >
+                                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                                </button>
+                                <button
+                                    onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)}
+                                    className="cyber-button p-2 sm:p-3 hover:text-[#92f792] transition-colors"
+                                >
+                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                                </button>
+                            </div>
                         </div>
 
                         {/* System Status */}
-                        <div className="cyber-border p-4">
+                        <div className="cyber-border p-3 sm:p-4">
                             <div className="flex items-center gap-2 text-[#81c784]">
                                 <div className="w-2 h-2 rounded-full bg-[#92f792] animate-pulse"></div>
-                                <span className="text-sm font-mono">TESTIMONIAL_MATRIX.STATUS: OPERATIONAL</span>
+                                <span className="text-xs sm:text-sm font-mono">TESTIMONIAL_MATRIX.STATUS: OPERATIONAL</span>
                             </div>
                         </div>
                     </div>
