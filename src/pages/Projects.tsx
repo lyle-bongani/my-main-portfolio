@@ -127,37 +127,37 @@ const Projects = () => {
                         </div>
 
                         {/* Filter Buttons */}
-                        <div className="flex gap-4 justify-center">
+                        <div className="flex flex-wrap gap-4 justify-center">
                             <button
                                 onClick={() => setActiveFilter('all')}
-                                className={`cyber-button px-6 py-2 ${activeFilter === 'all' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                className={`cyber-button px-4 py-2 text-sm sm:px-6 sm:py-2 sm:text-base ${activeFilter === 'all' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
                                 ALL
                             </button>
                             <button
                                 onClick={() => setActiveFilter('frontend')}
-                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'frontend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                className={`cyber-button px-4 py-2 text-sm sm:px-6 sm:py-2 sm:text-base flex items-center gap-2 ${activeFilter === 'frontend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
-                                <Code className="w-4 h-4" /> FRONTEND
+                                <Code className="w-3 h-3 sm:w-4 sm:h-4" /> FRONTEND
                             </button>
                             <button
                                 onClick={() => setActiveFilter('backend')}
-                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'backend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                className={`cyber-button px-4 py-2 text-sm sm:px-6 sm:py-2 sm:text-base flex items-center gap-2 ${activeFilter === 'backend' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
-                                <Server className="w-4 h-4" /> BACKEND
+                                <Server className="w-3 h-3 sm:w-4 sm:h-4" /> BACKEND
                             </button>
                             <button
                                 onClick={() => setActiveFilter('fullstack')}
-                                className={`cyber-button px-6 py-2 flex items-center gap-2 ${activeFilter === 'fullstack' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
+                                className={`cyber-button px-4 py-2 text-sm sm:px-6 sm:py-2 sm:text-base flex items-center gap-2 ${activeFilter === 'fullstack' ? 'text-[#92f792]' : 'text-[#81c784]'}`}
                             >
-                                <Layers className="w-4 h-4" /> FULL STACK
+                                <Layers className="w-3 h-3 sm:w-4 sm:h-4" /> FULL STACK
                             </button>
                         </div>
 
                         {/* Projects Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 gap-6 sm:gap-8">
                             {filteredProjects.map((project, index) => (
-                                <div key={index} className="group relative h-[400px] cyber-border overflow-hidden">
+                                <div key={index} className="group relative h-[300px] sm:h-[400px] cyber-border overflow-hidden">
                                     {/* Background iframe (always blurred) */}
                                     <div className="absolute inset-0 filter blur-sm">
                                         <iframe
@@ -168,7 +168,7 @@ const Projects = () => {
                                                 border: 'none',
                                                 width: '100%',
                                                 height: '100%',
-                                                minHeight: '400px'
+                                                minHeight: '300px'
                                             }}
                                             loading="lazy"
                                             sandbox="allow-scripts allow-same-origin allow-popups"
@@ -180,39 +180,39 @@ const Projects = () => {
 
                                     {/* Default View - Big Eye Icon */}
                                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 group-hover:opacity-0">
-                                        <Eye className="w-24 h-24 text-[#92f792] drop-shadow-[0_0_15px_rgba(146,247,146,0.5)]" />
+                                        <Eye className="w-16 h-16 sm:w-24 sm:h-24 text-[#92f792] drop-shadow-[0_0_15px_rgba(146,247,146,0.5)]" />
                                     </div>
 
                                     {/* Hover Content */}
-                                    <div className="absolute inset-0 bg-[#1a1a1a] bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 flex flex-col">
+                                    <div className="absolute inset-0 bg-[#1a1a1a] bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 sm:p-8 flex flex-col">
                                         <div className="flex justify-between items-start">
-                                            <h3 className="text-2xl text-[#92f792] mb-3">{project.title}</h3>
+                                            <h3 className="text-xl sm:text-2xl text-[#92f792] mb-2 sm:mb-3">{project.title}</h3>
                                             {!project.liveUrl && (
-                                                <span className="cyber-button px-3 py-1 text-sm text-[#92f792] animate-pulse">
+                                                <span className="cyber-button px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm text-[#92f792] animate-pulse">
                                                     IN_DEVELOPMENT
                                                 </span>
                                             )}
                                         </div>
-                                        <p className="text-[#81c784] text-lg mb-6">{project.description}</p>
+                                        <p className="text-[#81c784] text-sm sm:text-lg mb-4 sm:mb-6">{project.description}</p>
 
                                         {project.technologies && (
-                                            <div className="flex flex-wrap gap-3 mb-6">
+                                            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
                                                 {project.technologies.map((tech, i) => (
-                                                    <span key={i} className="text-sm cyber-button px-3 py-1 text-[#81c784]">
+                                                    <span key={i} className="text-xs sm:text-sm cyber-button px-2 py-1 sm:px-3 sm:py-1 text-[#81c784]">
                                                         {tech}
                                                     </span>
                                                 ))}
                                             </div>
                                         )}
 
-                                        <div className="mt-auto flex gap-6">
+                                        <div className="mt-auto flex flex-col sm:flex-row gap-3 sm:gap-6">
                                             <a
                                                 href={project.liveUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="cyber-button flex items-center gap-2 text-[#92f792] hover:text-[#c8e6c9] px-6 py-3 text-lg"
+                                                className="cyber-button flex items-center justify-center gap-2 text-[#92f792] hover:text-[#c8e6c9] px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-lg"
                                             >
-                                                <ExternalLink className="w-5 h-5" />
+                                                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
                                                 LIVE PREVIEW
                                             </a>
                                             {project.githubUrl && (
@@ -220,9 +220,9 @@ const Projects = () => {
                                                     href={project.githubUrl}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="cyber-button flex items-center gap-2 text-[#81c784] hover:text-[#c8e6c9] px-6 py-3 text-lg"
+                                                    className="cyber-button flex items-center justify-center gap-2 text-[#81c784] hover:text-[#c8e6c9] px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-lg"
                                                 >
-                                                    <Github className="w-5 h-5" />
+                                                    <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                                                     CODE
                                                 </a>
                                             )}

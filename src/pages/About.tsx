@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Code, Rocket, Star, Bot, Globe, Book, Binary, ChevronRight } from 'lucide-react';
+import { Terminal, Code, Rocket, Star, Bot, Globe, Book, Binary, ChevronRight, User } from 'lucide-react';
 import BootSequence from '../components/BootSequence';
 
 const About = () => {
@@ -58,13 +58,11 @@ const About = () => {
                                     </div>
                                 </div>
                                 <div className="w-full md:w-2/3">
-                                    <h1 className="text-3xl md:text-4xl font-bold mb-6 cyber-glitch text-[#c8e6c9] flex items-center gap-3">
-                                        <Code className="w-6 h-6" />
-                                        SYSTEM.IDENTITY
+                                    <h1 className="text-3xl md:text-4xl font-bold cyber-glitch text-[#c8e6c9] flex items-center gap-3">
+                                        <User className="w-6 h-6" />
+                                        ABOUT_SYSTEM
                                     </h1>
-                                    <p className="text-[#c8e6c9] text-lg leading-relaxed mb-4">
-                                        I'm Lyle Chadya, a Web Developer & UI/UX Designer with a passion for creating innovative digital experiences.
-                                    </p>
+                                    <p className="text-[#81c784] mt-4">I'm Lyle Chadya, a Software Developer with a passion for crafting innovative digital experiences</p>
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
                                         <div className="cyber-border p-3 text-center">
                                             <div className="text-[#92f792] text-xl font-bold">01</div>
@@ -97,7 +95,7 @@ const About = () => {
                                 <div className="flex items-start gap-3">
                                     <ChevronRight className="w-5 h-5 text-[#81c784] mt-1" />
                                     <p className="leading-relaxed">
-                                        After joining Uncommon.org's bootcamp in Bulawayo, I embarked on an exciting journey into web development and design.
+                                        After joining Uncommon.org's bootcamp in Bulawayo, I embarked on an exciting journey into Software Development
                                     </p>
                                 </div>
                             </div>
@@ -110,21 +108,36 @@ const About = () => {
                                 EXECUTED_PROGRAMS
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
+                                <a 
+                                    href="https://backers-new-inn.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all cursor-pointer"
+                                >
                                     <Globe className="w-6 h-6 text-[#81c784] mb-3" />
-                                    <h3 className="text-[#92f792] font-bold mb-2">Fudo Restaurant</h3>
+                                    <h3 className="text-[#92f792] font-bold mb-2">Backers New Inn</h3>
                                     <p className="text-[#c8e6c9] text-sm">A modern restaurant website with online ordering capabilities</p>
-                                </div>
-                                <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
+                                </a>
+                                <a 
+                                    href="https://typscript-portfolio.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all cursor-pointer"
+                                >
                                     <Binary className="w-6 h-6 text-[#81c784] mb-3" />
                                     <h3 className="text-[#92f792] font-bold mb-2">Fry Lyle</h3>
                                     <p className="text-[#c8e6c9] text-sm">A food delivery application with real-time order tracking</p>
-                                </div>
-                                <div className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all">
+                                </a>
+                                <a 
+                                    href="https://pok-dex-iota.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="cyber-border p-4 hover:bg-[#81c784] hover:bg-opacity-10 transition-all cursor-pointer"
+                                >
                                     <Bot className="w-6 h-6 text-[#81c784] mb-3" />
                                     <h3 className="text-[#92f792] font-bold mb-2">PokéDex</h3>
                                     <p className="text-[#c8e6c9] text-sm">A Pokémon encyclopedia application using PokeAPI</p>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
