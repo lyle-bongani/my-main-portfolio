@@ -12,6 +12,7 @@ import {
     Workflow,
     Brain
 } from 'lucide-react';
+import MatrixRain from '../components/MatrixRain';
 
 interface Skill {
     name: string;
@@ -101,6 +102,7 @@ const Skills = () => {
 
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
+            <MatrixRain />
             <div className="max-w-6xl mx-auto">
                 {!bootComplete ? (
                     <div className="absolute inset-0 z-10 flex items-center justify-center">

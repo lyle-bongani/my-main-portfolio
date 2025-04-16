@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, Code, Rocket, Star, Bot, Globe, Book, Binary, ChevronRight, User } from 'lucide-react';
 import BootSequence from '../components/BootSequence';
+import MatrixRain from '../components/MatrixRain';
 
 const About = () => {
     const [bootComplete, setBootComplete] = useState(false);
@@ -29,6 +30,7 @@ const About = () => {
 
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
+            <MatrixRain />
             <div className="max-w-6xl mx-auto">
                 {!bootComplete ? (
                     <div className="absolute inset-0 z-10 flex items-center justify-center">

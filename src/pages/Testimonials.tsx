@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import MatrixRain from '../components/MatrixRain';
 
 interface Testimonial {
     id: number;
@@ -46,6 +47,22 @@ const Testimonials = () => {
             avatar: './images/dylan.webp',
             message: 'Lyle consistently delivered high-quality work and showed great initiative in improving our project workflows. His cyberpunk-inspired designs brought a unique perspective to our applications.',
             rating: 5
+        },
+        {
+            id: 4,
+            name: 'Quinton Dlovu',
+            role: 'Software Developer',
+            avatar: './images/q.jpg',
+            message: 'Collaborating with Lyle has been exceptional. His technical expertise and innovative approach to problem-solving make him an outstanding developer. His ability to write clean, maintainable code is remarkable.',
+            rating: 5
+        },
+        {
+            id: 5,
+            name: 'Daniel Mudimba',
+            role: 'UI/UX & Product Designer',
+            avatar: './images/danial.png',
+            message: 'As a designer, I\'m impressed by Lyle\'s ability to perfectly translate design mockups into functional code. He has a great understanding of design principles and always implements UI components with pixel-perfect precision while maintaining excellent performance.',
+            rating: 5
         }
     ];
 
@@ -67,13 +84,14 @@ const Testimonials = () => {
         if (bootComplete) {
             const interval = setInterval(() => {
                 setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-            }, 5000);
+            }, 20000);
             return () => clearInterval(interval);
         }
     }, [bootComplete, testimonials.length]);
 
     return (
         <div className="min-h-screen pt-20 px-4 bg-[#1a1a1a]">
+            <MatrixRain />
             <div className="max-w-6xl mx-auto">
                 {!bootComplete ? (
                     <div className="absolute inset-0 z-10 flex items-center justify-center">
