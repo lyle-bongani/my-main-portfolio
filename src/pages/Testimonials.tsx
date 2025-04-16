@@ -118,7 +118,7 @@ const Testimonials = () => {
 
                         {/* Testimonials Display */}
                         <div className="relative cyber-border p-4 sm:p-6 bg-[#1a1a1a] min-h-[450px] sm:min-h-[400px]">
-                            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex gap-1">
+                            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex gap-1.5">
                                 {testimonials.map((_, index) => (
                                     <button
                                         key={index}
@@ -140,9 +140,9 @@ const Testimonials = () => {
                                                 : 'opacity-0 translate-x-full absolute top-0 left-0'
                                         }`}
                                     >
-                                        <div className="flex flex-col items-center gap-6 sm:gap-8">
+                                        <div className="flex flex-col md:flex-row md:items-start items-center gap-6 sm:gap-8 md:gap-12">
                                             {/* Avatar */}
-                                            <div className="relative w-28 h-28 sm:w-40 sm:h-40 cyber-border p-1.5 sm:p-2 rounded-full overflow-hidden group">
+                                            <div className="relative w-28 h-28 sm:w-40 sm:h-40 cyber-border p-1.5 sm:p-2 rounded-full overflow-hidden group flex-shrink-0">
                                                 <div className="absolute inset-0 bg-[#92f792] opacity-20 group-hover:opacity-30 transition-opacity" />
                                                 <img
                                                     src={testimonial.avatar}
@@ -153,45 +153,29 @@ const Testimonials = () => {
                                             </div>
 
                                             {/* Content */}
-                                            <div className="flex-1 space-y-3 sm:space-y-4 text-center sm:text-left">
-                                                <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2">
-                                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                                        <Star
-                                                            key={i}
-                                                            className="w-4 h-4 sm:w-5 sm:h-5 text-[#92f792] fill-current animate-pulse"
-                                                        />
-                                                    ))}
-                                                </div>
+                                            <div className="flex-1 space-y-3 sm:space-y-4 text-center md:text-left">
                                                 <div className="relative">
                                                     <Quote className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-6 h-6 sm:w-8 sm:h-8 text-[#92f792] opacity-30" />
-                                                    <p className="text-[#c8e6c9] text-base sm:text-lg italic pl-4 sm:pl-6">
+                                                    <p className="text-[#c8e6c9] text-base sm:text-lg italic pl-4 sm:pl-6 md:max-w-2xl">
                                                         {testimonial.message}
                                                     </p>
                                                 </div>
-                                                <div className="pt-3 sm:pt-4">
+                                                <div className="pt-3 sm:pt-4 space-y-2">
                                                     <h3 className="text-[#92f792] text-lg sm:text-xl font-bold">{testimonial.name}</h3>
                                                     <p className="text-[#81c784] text-sm sm:text-base">{testimonial.role}</p>
+                                                    <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 mt-1">
+                                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                                            <Star
+                                                                key={i}
+                                                                className="w-6 h-6 sm:w-8 sm:h-8 text-[#92f792] fill-current animate-pulse"
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
-                            </div>
-
-                            {/* Navigation Buttons */}
-                            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 sm:gap-6">
-                                <button
-                                    onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                                    className="cyber-button p-2 sm:p-3 hover:text-[#92f792] transition-colors"
-                                >
-                                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-                                </button>
-                                <button
-                                    onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)}
-                                    className="cyber-button p-2 sm:p-3 hover:text-[#92f792] transition-colors"
-                                >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                                </button>
                             </div>
                         </div>
 
