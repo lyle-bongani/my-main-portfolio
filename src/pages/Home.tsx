@@ -212,16 +212,16 @@ const Home = () => {
 
                     {/* Navigation Buttons */}
                     <div className="mt-16 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-                        <Link 
-                            to="/projects" 
+                        <Link
+                            to="/projects"
                             className="cyber-button group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto text-center justify-center"
                         >
                             <span>View Projects</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <a 
-                            href="/images/Lyle CV.pdf" 
-                            download="Lyle_CV.pdf"
+                        <a
+                            href="/images/Lyle CV.pdf"
+                            download="LYLE CV.pdf"
                             className="cyber-button group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto text-center justify-center"
                         >
                             <span>Download CV</span>
